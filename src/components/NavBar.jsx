@@ -20,7 +20,7 @@ export function NavBar() {
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Categories
                                 </a>
-                                    <ul className="dropdown-menu" >
+                                    <ul className="dropdown-menu" style={{ maxHeight: '200px', overflowY: 'auto' }}>
                                 {productData.map((product) => (
                                     <li key={product.id}><a className="dropdown-item"  href="#">{product.category}</a></li>
                                 ))}
