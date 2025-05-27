@@ -22,9 +22,9 @@ export function DetailProduct() {
                         <div className="col-md-8">
                             <div className="card-body">
                                 <h3 className="card-title">{findMatchItemId.title}</h3>
-                                <h4 className="text-danger">Rp {findMatchItemId.price.toLocaleString()}</h4>
+                                <h4 className="text-danger">$ {findMatchItemId.price.toLocaleString()}</h4>
                                 <p className="card-text">{findMatchItemId.description}</p>
-                                <Link to="/" className="btn btn-secondary mt-3">← Kembali</Link>
+                                <Link to="/" className="btn btn-danger mt-3">← Kembali</Link>
                             </div>
                         </div>
                     </div>
