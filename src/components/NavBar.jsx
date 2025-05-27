@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useProductContext } from "../contexts/contextData";
 
 export function NavBar() {
-    const {productData} = useProductContext();
+    const { productData } = useProductContext();
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -20,12 +20,12 @@ export function NavBar() {
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Categories
                                 </a>
-                                <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Action</a></li>
-                                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                                    <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                    <ul className="dropdown-menu" >
+                                {productData.map((product) => (
+                                    <li key={product.id}><a className="dropdown-item"  href="#">{product.category}</a></li>
+                                ))}
                                 </ul>
+
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link disabled" aria-disabled="true">Disabled</a>
