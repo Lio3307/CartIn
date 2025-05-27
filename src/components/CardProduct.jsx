@@ -6,7 +6,6 @@ export function CardProduct() {
 
     if (!productData) return <h3 className="text-center m-5">Tidak Ada Product</h3>;
 
-    console.log(productData)
     return (
         <div className="container my-4">
             <div className="row g-3">
