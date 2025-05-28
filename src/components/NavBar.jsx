@@ -5,7 +5,7 @@ export function NavBar() {
     const { productData } = useProductContext();
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar p navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Navbar</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,13 +22,13 @@ export function NavBar() {
                                 </a>
                                     <ul className="dropdown-menu" style={{ maxHeight: '200px', overflowY: 'auto' }}>
                                 {productData.map((product) => (
-                                    <li key={product.id}><a className="dropdown-item"  href="#">{product.category}</a></li>
+                                    <li key={product.id}><a className="dropdown-item"  href="#" onClick={() => (console.log(product.category))}>{product.category}</a></li>
                                 ))}
                                 </ul>
 
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                                <Link className="nav-link active" aria-current="page" to="/cartItems">Cart</Link>
                             </li>
                         </ul>
                         <form className="d-flex" role="search">

@@ -1,15 +1,13 @@
-import { useProductContext } from "../contexts/contextData";
 import { Link } from "react-router-dom";
 
-export function CardProduct() {
-    const { productData } = useProductContext();
+export function CardProduct({dataProduct}) {
 
-    if (!productData) return <h3 className="text-center m-5">Tidak Ada Product</h3>;
-    console.log(productData)
+    if (!dataProduct) return <h3 className="text-center m-5">Tidak Ada Product</h3>;
+    console.log(dataProduct)
     return (
         <div className="container my-4">
             <div className="row g-3">
-                {productData.map((product) => (
+                {dataProduct.map((product) => (
                     <div className="col-sm-6 col-md-4 col-lg-3" key={product.id}>
                         <div className="card h-100 shadow-sm border-0">
                             <div className="ratio ratio-4x3">
@@ -29,7 +27,7 @@ export function CardProduct() {
                                     {product.description}
                                 </p>
                                 
-                                <Link className="btn btn-primary btn-sm" to={`/detail-product/${Number(product.id)}`}> 
+                                <Link className="btn btn-primary m-1 btn-sm" to={`/detail-product/${Number(product.id)}`}> 
                                     Lihat Detail
                                 </Link>
                             </div>
