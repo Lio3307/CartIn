@@ -1,5 +1,4 @@
 import { useCartContext } from "../contexts/cartContext"
-import { Link } from "react-router-dom"
 
 export function CartItemsList() {
     const { cartItems, removeFromCart } = useCartContext()
