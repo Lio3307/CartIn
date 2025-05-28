@@ -17,9 +17,17 @@ export function CartProvider({ children }) {
         setCartItems(prevItems => [...prevItems, toCart])
     }
 
+    function removeFromCart(cartItemId) {
+        const removedCart = cartItems.filter(currentItem => currentItem.id !== cartItemId)
+        const confirmDeleted = confirm("Apakah anda yakin ingin membatalkan?")
+        if(!confirmDeleted) return;
+        setCartItems(removedCart)
+    }
+
     const valueCart = {
         cartItems,
-        addToCart
+        addToCart,
+        removeFromCart
     }
     return (
         <>
