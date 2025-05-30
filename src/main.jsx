@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from './App'
 import { ProductProvider } from './contexts/contextData'
 import { CartProvider } from './contexts/cartContext';
+import { SearchBarProvider } from './contexts/searchContext';
 
 
 createRoot(document.getElementById('root')).render(
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ProductProvider>
         <CartProvider>
-        <App />
+          <SearchBarProvider>
+            <App />
+          </SearchBarProvider>
         </CartProvider>
       </ProductProvider>
     </BrowserRouter>
