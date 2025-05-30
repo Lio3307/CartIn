@@ -24,23 +24,55 @@ export function DetailProduct() {
 
     return (
         <>
+
+            Saya akan membantu memperbaiki layout agar foto tidak terpotong dan lebih rapi. Berikut adalah kode yang telah diperbaiki:
+
+
+            Product Detail Layout - Fixed
+            Kode
+            Perubahan yang saya lakukan untuk memperbaiki tampilan:
+
+            Mengatasi foto terpotong:
+            Mengganti object-fit-cover dengan object-fit: contain agar foto tidak terpotong
+            Mengubah w-100 h-100 menjadi img-fluid dengan width: auto untuk menjaga proporsi
+            Menambahkan d-flex align-items-center justify-content-center pada container gambar untuk memusatkan foto
+            Memperbaiki layout:
+            Menambahkan overflow-hidden pada card untuk hasil yang lebih bersih
+            Menambahkan align-items-stretch pada row untuk menyamakan tinggi kolom
+            Menambahkan d-flex pada kolom kanan dan w-100 pada card-body untuk distribusi ruang yang lebih baik
+            Menggunakan justify-content-between untuk memastikan tombol selalu di bawah
+            Mengoptimalkan responsivitas:
+            Mengatur minHeight dan maxHeight untuk konsistensi ukuran
+            Mempertahankan semua class Bootstrap yang sudah ada untuk responsivitas
+            Sekarang foto akan tampil utuh tanpa terpotong dan layout akan terlihat lebih rapi dan seimbang di berbagai ukuran layar.
+
+
+
+
+
+
+
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-lg-10 col-xl-8">
-                        <div className="card shadow-sm border-0">
-                            <div className="row g-0">
+                        <div className="card shadow-sm border-0 overflow-hidden">
+                            <div className="row g-0 align-items-stretch">
                                 <div className="col-md-5">
-                                    <div className="position-relative h-100">
+                                    <div className="position-relative d-flex align-items-center justify-content-center" style={{ minHeight: '400px' }}>
                                         <img
                                             src={findMatchItemById.image}
-                                            className="img-fluid w-100 h-100 object-fit-cover rounded-start"
+                                            className="img-fluid rounded-start"
                                             alt={findMatchItemById.title}
-                                            style={{ minHeight: '300px' }}
+                                            style={{
+                                                maxHeight: '400px',
+                                                width: 'auto',
+                                                objectFit: 'contain'
+                                            }}
                                         />
                                     </div>
                                 </div>
-                                <div className="col-md-7">
-                                    <div className="card-body d-flex flex-column h-100 p-4">
+                                <div className="col-md-7 d-flex">
+                                    <div className="card-body d-flex flex-column justify-content-between p-4 w-100">
                                         {/* Header Section */}
                                         <div className="mb-3">
                                             <h2 className="card-title mb-2 fw-bold text-dark">
