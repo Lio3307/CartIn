@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSearchBarContext } from "../contexts/searchContext";
 
 export function NavBar() {
     const { inputVal, setInputVal, handleInput } = useSearchBarContext()
+
+    const currentLocation = useLocation()
+    const hideElements = currentLocation.pathname === '/cartItems'
     return (
         <>
             <nav className="navbar p navbar-expand-lg bg-body-tertiary">
@@ -20,15 +23,16 @@ export function NavBar() {
                                 <Link className="nav-link active" aria-current="page" to="/cartItems">Cart</Link>
                             </li>
                         </ul>
-                        <form className="d-flex" onSubmit={handleInput}  role="search">
-                            <input 
-                            value={inputVal}
-                            className="form-control me-2" 
-                            type="search" placeholder="Search" 
-                            onChange={e => setInputVal(e.target.value)}
-                            aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        {!hideElements &&
+                            (<form className="d-flex" onSubmit={handleInput} role="search">
+                                <input
+                                    value={inputVal}
+                                    className="form-control me-2"
+                                    type="search" placeholder="Search"
+                                    onChange={e => setInputVal(e.target.value)}
+                                    aria-label="Search" />
+                                <button className="btn btn-outline-success" type="submit">Search</button>
+                            </form>)}
                     </div>
                 </div>
             </nav>
