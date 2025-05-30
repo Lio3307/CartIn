@@ -25,33 +25,7 @@ export function DetailProduct() {
     return (
         <>
 
-            Saya akan membantu memperbaiki layout agar foto tidak terpotong dan lebih rapi. Berikut adalah kode yang telah diperbaiki:
-
-
-            Product Detail Layout - Fixed
-            Kode
-            Perubahan yang saya lakukan untuk memperbaiki tampilan:
-
-            Mengatasi foto terpotong:
-            Mengganti object-fit-cover dengan object-fit: contain agar foto tidak terpotong
-            Mengubah w-100 h-100 menjadi img-fluid dengan width: auto untuk menjaga proporsi
-            Menambahkan d-flex align-items-center justify-content-center pada container gambar untuk memusatkan foto
-            Memperbaiki layout:
-            Menambahkan overflow-hidden pada card untuk hasil yang lebih bersih
-            Menambahkan align-items-stretch pada row untuk menyamakan tinggi kolom
-            Menambahkan d-flex pada kolom kanan dan w-100 pada card-body untuk distribusi ruang yang lebih baik
-            Menggunakan justify-content-between untuk memastikan tombol selalu di bawah
-            Mengoptimalkan responsivitas:
-            Mengatur minHeight dan maxHeight untuk konsistensi ukuran
-            Mempertahankan semua class Bootstrap yang sudah ada untuk responsivitas
-            Sekarang foto akan tampil utuh tanpa terpotong dan layout akan terlihat lebih rapi dan seimbang di berbagai ukuran layar.
-
-
-
-
-
-
-
+            
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-lg-10 col-xl-8">
@@ -73,7 +47,6 @@ export function DetailProduct() {
                                 </div>
                                 <div className="col-md-7 d-flex">
                                     <div className="card-body d-flex flex-column justify-content-between p-4 w-100">
-                                        {/* Header Section */}
                                         <div className="mb-3">
                                             <h2 className="card-title mb-2 fw-bold text-dark">
                                                 {findMatchItemById.title}
@@ -83,7 +56,6 @@ export function DetailProduct() {
                                             </h3>
                                         </div>
 
-                                        {/* Description Section */}
                                         <div className="flex-grow-1 mb-4">
                                             <h6 className="text-muted mb-2">Deskripsi Produk</h6>
                                             <p className="card-text text-secondary lh-lg">
@@ -91,7 +63,6 @@ export function DetailProduct() {
                                             </p>
                                         </div>
 
-                                        {/* Action Buttons */}
                                         <div className="d-flex flex-column flex-sm-row gap-2 mt-auto">
                                             <button
                                                 onClick={handleCart}
