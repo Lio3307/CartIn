@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { useProductContext } from "./contextData";
 
 const CartContext = createContext()
@@ -8,20 +8,32 @@ export function CartProvider({ children }) {
 
     const { productData } = useProductContext()
 
+    useEffect(() => {
+        const localDataStorage = localStorage.getItem('cartItems')
+        if(localDataStorage) setCartItems(JSON.parse(localDataStorage))
+    }, [])
+
     function addToCart(itemsId) {
         const inCart = productData.find(currentVal => itemsId === currentVal.id)
         if(!inCart) return;
         const toCart = {...inCart}
 
 
-        setCartItems(prevItems => [...prevItems, toCart])
+        setCartItems(prevItems => {
+            const setCartValue = [...prevItems, toCart]
+            localStorage.setItem('cartItems', JSON.stringify(setCartValue))
+            return setCartValue
+        })
     }
 
     function removeFromCart(cartItemId) {
-        const removedCart = cartItems.filter(currentItem => currentItem.id !== cartItemId)
         const confirmDeleted = confirm("Apakah anda yakin ingin membatalkan?")
         if(!confirmDeleted) return;
-        setCartItems(removedCart)
+        setCartItems((currentVal) => {
+            const removedCart = currentVal.filter(currentItem => currentItem.id !== cartItemId)
+            localStorage.setItem('cartItems', JSON.stringify(removedCart))
+            return removedCart;
+        })
     }
 
     const valueCart = {

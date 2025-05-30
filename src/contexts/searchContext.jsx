@@ -7,7 +7,6 @@ export function SearchBarProvider({ children }) {
     const [inputVal, setInputVal] = useState('')
     const { productData } = useProductContext()
     const [filteredItems, setFilteredItems] = useState()
-    console.log(filteredItems)
 
 
     const handleInput = (e) => {
