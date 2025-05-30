@@ -5,7 +5,7 @@ export function NavBar() {
     const { inputVal, setInputVal, handleInput } = useSearchBarContext()
 
     const currentLocation = useLocation()
-    const hideElements = currentLocation.pathname === '/cartItems'
+    const hideElements = currentLocation.pathname === '/cartItems' || currentLocation.pathname.startsWith('/detail-product')
     return (
         <>
             <nav className="navbar p navbar-expand-lg bg-body-tertiary">
