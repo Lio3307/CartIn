@@ -4,8 +4,8 @@ import { useCartContext } from "../contexts/cartContext";
 import { useState, useEffect } from "react";
 
 export function DetailProduct() {
-    const { productData } = useProductContext();
-    const { addToCart, cartItems } = useCartContext()
+    const { productData} = useProductContext();
+    const { addToCart } = useCartContext()
 
     const [matchItemById, setMatchItemById] = useState([])
 
@@ -22,13 +22,8 @@ export function DetailProduct() {
 
     const handleCart = (e) => {
         e.preventDefault()
-        const alreadyInCart = cartItems.some(itemVal => itemVal.id === matchItemById.id)
-        if (alreadyInCart) return alert("Data sudah Ada!!")
-        else {
-            alert("Data Di Tambahkan Ke Keranjang")
-            addToCart(matchItemById.id)
-        }
-
+        addToCart(matchItemById.id)
+        alert('Item telah di tammbah ke keranjang')
     }
 
     return (

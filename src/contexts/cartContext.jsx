@@ -14,15 +14,14 @@ export function CartProvider({ children }) {
     }, [])
 
     function addToCart(itemsId) {
-        const inProduct = productData.find(product => product.id === itemsId);
-        if (!inProduct) return;
-
+        const inCart = productData.find(product => product.id === itemsId);
+        if (!inCart) return;
+    
         setCartItems(prevItems => {
             const existingItem = prevItems.find(item => item.id === itemsId);
-
+    
             let updatedCart;
-            console.log(prevItems)
-
+    
             if (existingItem) {
                 updatedCart = prevItems.map(item =>
                     item.id === itemsId
@@ -33,22 +32,21 @@ export function CartProvider({ children }) {
                 updatedCart = [
                     ...prevItems,
                     {
-                        id: inProduct.id,
-                        title: inProduct.title,
-                        price: inProduct.price,
-                        description: inProduct.description,
-                        category: inProduct.category,
-                        image: inProduct.image,
-                        qty: 1,
-                        stock: inProduct.stock
+                        id: inCart.id,
+                        title: inCart.title,
+                        price: inCart.price,
+                        description: inCart.description,
+                        image: inCart.image,
+                        qty: 1
                     }
                 ];
             }
-
+    
             localStorage.setItem('cartItems', JSON.stringify(updatedCart));
             return updatedCart;
         });
     }
+    
 
     function removeFromCart(cartItemId) {
         const confirmDeleted = confirm("Apakah anda yakin ingin membatalkan?")
