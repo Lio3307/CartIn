@@ -15,7 +15,7 @@ export function ProductProvider({ children }) {
                 const productDataWithQty = getProductData.map((product) => {
                     return {
                         ...product,
-                        qty: 10
+                        stock: 10
                     }
                 })
                 setProductData(productDataWithQty)

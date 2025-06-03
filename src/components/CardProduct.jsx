@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 export function CardProduct({dataProduct}) {
 
     if (!dataProduct) return <h3 className="text-center m-5">Tidak Ada Product</h3>;
-    console.log(dataProduct)
     return (
         <div className="container my-4">
             <div className="row g-3">
@@ -24,9 +23,13 @@ export function CardProduct({dataProduct}) {
                                 </h5>
                                 
                                 <p className="card-text text-muted small text-truncate mb-3 flex-grow-1" style={{ maxWidth: "100%" }}>
-                                    {product.description}
+                                    stock : {product.stock}
                                 </p>
                                 
+                                <p className="card-text text-muted small text-truncate mb-3 flex-grow-1" style={{ maxWidth: "100%" }}>
+                                    {product.description}
+                                </p>
+
                                 <Link className="btn btn-primary m-1 btn-sm" to={`/detail-product/${Number(product.id)}`}> 
                                     Lihat Detail
                                 </Link>

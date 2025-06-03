@@ -1,25 +1,34 @@
 import { useProductContext } from "../contexts/contextData";
 import { Link, useParams } from "react-router-dom";
 import { useCartContext } from "../contexts/cartContext";
+import { useState, useEffect } from "react";
 
 export function DetailProduct() {
     const { productData } = useProductContext();
     const { addToCart, cartItems } = useCartContext()
 
+    const [matchItemById, setMatchItemById] = useState([])
+
 
     const { id } = useParams();
 
-    const findMatchItemById = productData.find((valItem) => valItem.id === parseInt(id))
-    if (!findMatchItemById) return <h3 className="text-center">Data Product Tidak Ada</h3>
+    useEffect(() => {
+        setMatchItemById(productData.find((valItem) => valItem.id === parseInt(id)))
+    }, [])
+
+    if (!matchItemById) return <h3 className="text-center">Data Product Tidak Ada</h3>
+
+    const checkStock = matchItemById.stock === 0
 
     const handleCart = (e) => {
         e.preventDefault()
-        const alreadyInCart = cartItems.some(itemVal => itemVal.id === findMatchItemById.id)
+        const alreadyInCart = cartItems.some(itemVal => itemVal.id === matchItemById.id)
         if (alreadyInCart) return alert("Data sudah Ada!!")
         else {
             alert("Data Di Tambahkan Ke Keranjang")
-            addToCart(findMatchItemById.id)
+            addToCart(matchItemById.id)
         }
+
     }
 
     return (
@@ -32,9 +41,9 @@ export function DetailProduct() {
                                 <div className="col-md-5">
                                     <div className="position-relative d-flex align-items-center justify-content-center" style={{ minHeight: '400px' }}>
                                         <img
-                                            src={findMatchItemById.image}
+                                            src={matchItemById.image}
                                             className="img-fluid rounded-start"
-                                            alt={findMatchItemById.title}
+                                            alt={matchItemById.title}
                                             style={{
                                                 maxHeight: '400px',
                                                 width: 'auto',
@@ -47,17 +56,21 @@ export function DetailProduct() {
                                     <div className="card-body d-flex flex-column justify-content-between p-4 w-100">
                                         <div className="mb-3">
                                             <h2 className="card-title mb-2 fw-bold text-dark">
-                                                {findMatchItemById.title}
+                                                {matchItemById.title}
                                             </h2>
                                             <h3 className="text-danger fw-bold mb-0">
-                                                ${findMatchItemById.price}
+                                                ${matchItemById.price}
                                             </h3>
+                                        </div>
+
+                                        <div className="flex-grow-1 mb-4">
+                                            <h6 className="text-muted mb-2">Stock : {matchItemById.qty}</h6>
                                         </div>
 
                                         <div className="flex-grow-1 mb-4">
                                             <h6 className="text-muted mb-2">Deskripsi Produk</h6>
                                             <p className="card-text text-secondary lh-lg">
-                                                {findMatchItemById.description}
+                                                {matchItemById.description}
                                             </p>
                                         </div>
 
@@ -65,6 +78,7 @@ export function DetailProduct() {
                                             <button
                                                 onClick={handleCart}
                                                 className="btn btn-warning fw-semibold px-4 py-2 flex-grow-1"
+                                                disabled={checkStock}
                                             >
                                                 <i className="bi bi-cart-plus me-2"></i>
                                                 Tambah ke Keranjang
@@ -77,6 +91,7 @@ export function DetailProduct() {
                                                 Kembali
                                             </Link>
                                         </div>
+                                        {checkStock ? <p className="text-danger text-center mt-3">Stock telah habis!!</p> : ''}
                                     </div>
                                 </div>
                             </div>
