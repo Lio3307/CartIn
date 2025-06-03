@@ -32,7 +32,7 @@ export function CartItemsList() {
                                                     {productCart.description}
                                                 </p>
 
-                                                <p className="card-text text-muted small mb-2"> qty : {productCart.qty}</p>
+                                                <p className="card-text text-muted small mb-2"> Jumlah barang : {productCart.qty}</p>
                                             </div>
 
                                             <div className="col-md-3 col-12">

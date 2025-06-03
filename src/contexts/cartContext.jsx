@@ -10,18 +10,24 @@ export function CartProvider({ children }) {
 
     useEffect(() => {
         const localDataStorage = localStorage.getItem('cartItems')
-        if(localDataStorage) setCartItems(JSON.parse(localDataStorage))
+        if (localDataStorage) setCartItems(JSON.parse(localDataStorage))
     }, [])
 
     function addToCart(itemsId) {
         const inCart = productData.find(product => product.id === itemsId);
         if (!inCart) return;
-    
+
         setCartItems(prevItems => {
             const existingItem = prevItems.find(item => item.id === itemsId);
-    
+            const currentQty = existingItem ? existingItem.qty : 0;
+
+            if (currentQty >= inCart.stock) {
+                alert(`Stok hanya: ${inCart.stock}`);
+                return prevItems;
+            }
+
             let updatedCart;
-    
+
             if (existingItem) {
                 updatedCart = prevItems.map(item =>
                     item.id === itemsId
@@ -41,16 +47,17 @@ export function CartProvider({ children }) {
                     }
                 ];
             }
-    
+
+
             localStorage.setItem('cartItems', JSON.stringify(updatedCart));
             return updatedCart;
         });
     }
-    
+
 
     function removeFromCart(cartItemId) {
         const confirmDeleted = confirm("Apakah anda yakin ingin membatalkan?")
-        if(!confirmDeleted) return;
+        if (!confirmDeleted) return;
         setCartItems((currentVal) => {
             const removedCart = currentVal.filter(currentItem => currentItem.id !== cartItemId)
             localStorage.setItem('cartItems', JSON.stringify(removedCart))

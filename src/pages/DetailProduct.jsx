@@ -4,10 +4,12 @@ import { useCartContext } from "../contexts/cartContext";
 import { useState, useEffect } from "react";
 
 export function DetailProduct() {
-    const { productData} = useProductContext();
+    const { productData } = useProductContext();
     const { addToCart } = useCartContext()
 
     const [matchItemById, setMatchItemById] = useState([])
+    const [message, setMessage] = useState("")
+
 
 
     const { id } = useParams();
@@ -21,10 +23,20 @@ export function DetailProduct() {
     const checkStock = matchItemById.stock === 0
 
     const handleCart = (e) => {
-        e.preventDefault()
-        addToCart(matchItemById.id)
-        alert('Item telah di tammbah ke keranjang')
+        e.preventDefault();
+
+        const currentQty = JSON.parse(localStorage.getItem("cartItems") || "[]")
+            .find(item => item.id === matchItemById.id)?.qty || 0;
+
+        if (currentQty >= matchItemById.stock) {
+            setMessage(`Stok hanya: ${matchItemById.stock}`);
+            return;
+        }
+
+        addToCart(matchItemById.id);
+        setMessage("Item telah ditambah ke keranjang");
     }
+
 
     return (
         <>
@@ -86,7 +98,12 @@ export function DetailProduct() {
                                                 Kembali
                                             </Link>
                                         </div>
-                                        {checkStock ? <p className="text-danger text-center mt-3">Stock telah habis!!</p> : ''}
+                                        {checkStock && <p className="text-danger text-center mt-3">Stock telah habis!!</p>}
+                                        {message && (
+                                            <p className={`text-center mt-3 fw-semibold ${message.includes("Stok") ? "text-danger" : "text-success"}`}>
+                                                {message}
+                                            </p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
