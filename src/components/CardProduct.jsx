@@ -23,7 +23,7 @@ export function CardProduct({dataProduct}) {
                                 </h5>
                                 
                                 <p className="card-text text-muted small text-truncate mb-3 flex-grow-1" style={{ maxWidth: "100%" }}>
-                                    stock : {product.stock}
+                                    Stock : {product.stock}
                                 </p>
                                 
                                 <p className="card-text text-muted small text-truncate mb-3 flex-grow-1" style={{ maxWidth: "100%" }}>

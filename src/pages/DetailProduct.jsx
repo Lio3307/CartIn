@@ -64,7 +64,7 @@ export function DetailProduct() {
                                         </div>
 
                                         <div className="flex-grow-1 mb-4">
-                                            <h6 className="text-muted mb-2">Stock : {matchItemById.qty}</h6>
+                                            <h6 className="text-muted mb-2">Stock : {matchItemById.stock}</h6>
                                         </div>
 
                                         <div className="flex-grow-1 mb-4">

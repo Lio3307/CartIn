@@ -14,7 +14,6 @@ export function CartItemsList() {
                                 <div className="card shadow-sm border-0 mb-2">
                                     <div className="card-body p-3">
                                         <div className="row g-3 align-items-center">
-                                            {/* Product Image */}
                                             <div className="col-md-2 col-3">
                                                 <div className="ratio ratio-1x1">
                                                     <img
@@ -25,7 +24,6 @@ export function CartItemsList() {
                                                 </div>
                                             </div>
 
-                                            {/* Product Details */}
                                             <div className="col-md-7 col-9">
                                                 <h6 className="card-title mb-2 fw-semibold text-dark">
                                                     {productCart.title}
@@ -33,9 +31,10 @@ export function CartItemsList() {
                                                 <p className="card-text text-muted small mb-2">
                                                     {productCart.description}
                                                 </p>
+
+                                                <p className="card-text text-muted small mb-2"> qty : {productCart.qty}</p>
                                             </div>
 
-                                            {/* Price */}
                                             <div className="col-md-3 col-12">
                                                 <div className="text-md-end">
                                                     <h5 className="text-danger fw-bold mb-0">
