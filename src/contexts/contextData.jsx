@@ -12,7 +12,13 @@ export function ProductProvider({ children }) {
             try {
                 const fetchData = await fetch('https://fakestoreapi.com/products');
                 const getProductData = await fetchData.json()
-                setProductData(getProductData)
+                const productDataWithQty = getProductData.map((product) => {
+                    return {
+                        ...product,
+                        qty: 10
+                    }
+                })
+                setProductData(productDataWithQty)
 
             } catch (err) {
                 console.log("Error" + err)
