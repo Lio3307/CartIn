@@ -1,7 +1,14 @@
 import { useCartContext } from "../contexts/cartContext"
+import { useProductContext } from "../contexts/contextData"
 
 export function CartItemsList() {
-    const { cartItems, removeFromCart } = useCartContext()
+    const { cartItems, removeFromCart, updateCartQty } = useCartContext()
+    const { productData } = useProductContext()
+
+    const totalCost = cartItems.reduce((total, items) => {
+        return total + (items.qty * items.price)
+    }, 0)
+
 
 
     return (
@@ -33,6 +40,45 @@ export function CartItemsList() {
                                                 </p>
 
                                                 <p className="card-text text-muted small mb-2"> Jumlah barang : {productCart.qty}</p>
+
+                                                <input
+                                                    type="number"
+                                                    min={1}
+                                                    max={
+                                                        productData.find((product) => product.id === productCart.id)?.stock ?? 1
+                                                    }
+                                                    value={productCart.qty}
+                                                    onChange={(e) => {
+                                                        const inputValue = Number(e.target.value);
+
+                                                        if (isNaN(inputValue)) {
+                                                            alert("Masukkan angka yang valid");
+                                                            return;
+                                                        }
+
+                                                        if (inputValue < 1) {
+                                                            alert("Jumlah tidak boleh kurang dari 1");
+                                                            return;
+                                                        }
+
+                                                        const product = productData.find((p) => p.id === productCart.id);
+
+                                                        if (!product) {
+                                                            alert("Produk tidak ditemukan");
+                                                            return;
+                                                        }
+
+                                                        if (inputValue > product.stock) {
+                                                            alert("Jumlah melebihi stok");
+                                                            return;
+                                                        }
+
+                                                        updateCartQty(productCart.id, inputValue);
+                                                    }}
+                                                    className="form-control w-50"
+                                                />
+
+
                                             </div>
 
                                             <div className="col-md-3 col-12">
@@ -40,9 +86,9 @@ export function CartItemsList() {
                                                     <h5 className="text-danger fw-bold mb-0">
                                                         ${productCart.price}
                                                     </h5>
-                                                    <button 
-                                                    onClick={() => {removeFromCart(productCart.id)}}
-                                                    className="btn btn-danger my-3">Cancle</button>
+                                                    <button
+                                                        onClick={() => { removeFromCart(productCart.id) }}
+                                                        className="btn btn-danger my-3">Cancle</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -50,6 +96,7 @@ export function CartItemsList() {
                                 </div>
                             </div>
                         ))}
+                        <p>${totalCost}</p>
                     </div>
                 </div>)
                 :
