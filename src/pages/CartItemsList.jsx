@@ -3,7 +3,7 @@ import { useProductContext } from "../contexts/contextData"
 
 export function CartItemsList() {
     const { cartItems, removeFromCart, updateCartQty } = useCartContext()
-    const { productData } = useProductContext()
+    const { productData, updateStock } = useProductContext()
 
     const totalCost = cartItems.reduce((total, items) => {
         return total + (items.qty * items.price)
@@ -69,7 +69,6 @@ export function CartItemsList() {
                                                         }
 
                                                         if (inputValue > product.stock) {
-                                                            alert("Jumlah melebihi stok");
                                                             return;
                                                         }
 
@@ -97,6 +96,19 @@ export function CartItemsList() {
                             </div>
                         ))}
                         <p>${totalCost}</p>
+                        <button 
+                        onClick={(e) => {
+                            e.preventDefault()
+                            let confirmCheckOut = confirm("You wanna Check Out?")
+                            if(!confirmCheckOut) {
+                                return
+                            }
+                            updateStock(cartItems)
+                            localStorage.removeItem('cartItems')
+                            location.reload ()
+                            
+                        }}
+                        className="btn btn-warning">Check Out</button>
                     </div>
                 </div>)
                 :

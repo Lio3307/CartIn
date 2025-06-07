@@ -35,10 +35,32 @@ export function ProductProvider({ children }) {
         fetchData()
     }, [])
 
+
+    function updateStock(cartItems) {
+        setProductData(prevItems => {
+            const updatedProducts = prevItems.map(product => {
+                const itemInCart = cartItems.find(item => item.id === product.id)
+                if (itemInCart) {
+                    return {
+                        ...product,
+                        stock: product.stock - itemInCart.qty
+                    }
+                }
+                return product
+            })
+    
+            localStorage.setItem('productData', JSON.stringify(updatedProducts))
+            return updatedProducts
+        })
+    }
+    
+
+
     const value = {
         productData,
         setProductData,
-        isLoading
+        isLoading,
+        updateStock
     }
     return (
         <productContext.Provider value={value}>
